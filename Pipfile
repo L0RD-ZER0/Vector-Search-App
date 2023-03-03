@@ -9,6 +9,7 @@ requests = "*"
 pinecone-client = "*"
 scikit-learn = "*"
 sentence-transformers = "*"
+python-dotenv = "*"
 
 [dev-packages]
 
