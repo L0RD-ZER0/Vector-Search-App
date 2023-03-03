@@ -139,3 +139,5 @@ dmypy.json
 # Misc. Ignore
 ffmpeg/
 .idea/
+model/
+models/

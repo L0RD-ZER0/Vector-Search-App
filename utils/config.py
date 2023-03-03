@@ -12,4 +12,7 @@ class Config:
     MYSQL_PASSWD = environ['MYSQL_PASSWD']
     MYSQL_USER = 'root'
     PINECONE_API_KEY = environ['PINECONE_API']
+    PINECONE_INDEX = environ['PINECONE_INDEX']
+    PINECONE_ENVIRONMENT = environ['PINECONE_ENVIRONMENT']
     MODEL_NAME = environ['MODEL_NAME']
+    MODEL_DIMENTIONS = int(environ['MODEL_DIMENTIONS'])
