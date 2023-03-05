@@ -136,6 +136,9 @@ dmypy.json
 # Pipfile
 # Pipfile.lock
 
+# Ignore dataset from being comitted.
+data/
+
 # Misc. Ignore
 ffmpeg/
 .idea/

@@ -11,6 +11,7 @@ scikit-learn = "*"
 sentence-transformers = "*"
 python-dotenv = "*"
 mysql-connector-python = "*"
+gensim = "*"
 
 [dev-packages]
 

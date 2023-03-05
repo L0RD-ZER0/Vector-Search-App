@@ -7,6 +7,7 @@ load_dotenv()
 
 
 class Config:
+    DATASET = environ['DATASET_CSV']
     MYSQL_HOST = environ['MYSQL_HOST']
     MYSQL_PORT = environ['MYSQL_PORT']
     MYSQL_USER = environ['MYSQL_USER']
