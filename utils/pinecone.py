@@ -19,9 +19,10 @@ def get_index():
     return pinecone.Index(Config.PINECONE_INDEX)
 
 
-def upsert_vectors(data: list[dict[str, int | int | numpy.ndarray[float]]]):
+def upsert_vectors(data: list[dict[str, int | int | numpy.ndarray[float]]], *, batch_size: int = 100):
     data = [(str(_['id']), _['vector'].tolist(), {'mysql_id': _['mysql_id']}) for _ in data]
-    get_index().upsert(data)  # type: ignore
+    for batch_start in range(0, len(data), batch_size):
+        get_index().upsert(data[batch_start: batch_start + batch_size])  # type: ignore
 
 
 def upsert_vector(data: dict[str, int | int | numpy.ndarray[float]]):
