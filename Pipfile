@@ -10,6 +10,7 @@ pinecone-client = "*"
 scikit-learn = "*"
 sentence-transformers = "*"
 python-dotenv = "*"
+mysql-connector-python = "*"
 
 [dev-packages]
 

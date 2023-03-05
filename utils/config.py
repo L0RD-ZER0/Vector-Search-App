@@ -9,8 +9,8 @@ load_dotenv()
 class Config:
     MYSQL_HOST = environ['MYSQL_HOST']
     MYSQL_PORT = environ['MYSQL_PORT']
+    MYSQL_USER = environ['MYSQL_USER']
     MYSQL_PASSWD = environ['MYSQL_PASSWD']
-    MYSQL_USER = 'root'
     PINECONE_API_KEY = environ['PINECONE_API']
     PINECONE_INDEX = environ['PINECONE_INDEX']
     PINECONE_ENVIRONMENT = environ['PINECONE_ENVIRONMENT']
