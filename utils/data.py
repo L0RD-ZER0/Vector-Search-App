@@ -2,6 +2,7 @@ from __future__ import annotations
 import gensim
 import pandas
 from utils.config import Config
+from typing import TypedDict, Optional
 
 gensim.parsing.preprocessing.STOPWORDS.difference(
     {'above', 'against', 'bill', 'cant', 'during', 'eight', 'empty', 'first', 'five', 'former', 'found', 'four',
@@ -9,25 +10,31 @@ gensim.parsing.preprocessing.STOPWORDS.difference(
 )
 
 
+RECORD = TypedDict('RECORD', {
+    'id': int,
+    'title': str,
+    'authors': Optional[str],
+    'affiliations': Optional[str],
+    'abstract': Optional[str],
+    'text': str,
+    'bibliography': str,
+})
+
+
+def create_vector_text(record: pandas.Series | RECORD):
+    return record['title'] + " \n\n" + record['text']
+
+
 def clean_dataset(dataset: pandas.DataFrame) -> pandas.DataFrame:
-    dataset = dataset.drop(['paper_id', 'document_keyword'], axis=1)
-    dataset.insert(loc=0, column='id', value=dataset.index + 1)
+    dataset.drop(['paper_id', 'document_keyword'], axis=1, inplace=True)
+    dataset.dropna(subset=['title'], axis=0, inplace=True)
+    dataset.insert(loc=0, column='id', value=range(1, 1 + len(dataset), 1))  # type: ignore
+    dataset.index = range(0, len(dataset))
     return dataset
 
 
 def load_dataset() -> pandas.DataFrame:
     return clean_dataset(pandas.read_csv(Config.DATASET))
-
-
-def dataset_to_db(dataset: pandas.DataFrame) -> None:
-    """
-    Send pandas dataset to database.
-
-    Parameters
-    ----------
-    dataset: pandas.DataFrame
-        Dataset to store
-    """
 
 
 def normalise_string(string: str) -> str:

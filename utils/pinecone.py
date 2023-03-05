@@ -62,3 +62,11 @@ def _format_fetch_response(data: dict[str, str | dict[str | int] | list[float]])
         'mysql_id': int(data['metadata']['mysql_id']),
         'vector': numpy.array(data['values']),
     }
+
+
+def get_count() -> int:
+    return get_index().describe_index_stats()['total_vector_count']
+
+
+def teardown_pinecone():
+    pass  # placeholder in case it's needed

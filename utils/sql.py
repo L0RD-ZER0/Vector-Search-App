@@ -8,7 +8,7 @@ _TABLES = {
     'reports': """
     CREATE TABLE IF NOT EXISTS `reports`(
         `id` int(15) PRIMARY KEY,
-        `title` varchar(4095),
+        `title` varchar(4095) NOT NULL,
         `authors` varchar(4095),
         `affiliations` mediumtext,
         `abstract` mediumtext,
@@ -58,6 +58,14 @@ _QUERIES = {
     'clear_articles': """
     DELETE FROM `reports`
     """,
+    'fetch_title': """
+    SELECT `id`, `title`
+    FROM 
+        `reports`
+    WHERE
+        `id` = %(id)s
+    ;
+    """
 }
 
 
@@ -176,9 +184,35 @@ def query_articles(article_ids: list[int]) -> list[dict[str, str | int]]:
     return data
 
 
+def fetch_title(article_id: int):
+    conn = get_connection()
+    cur = conn.cursor()
+    cur.execute(_QUERIES['fetch_article'], {'id': article_id})
+    data = cur.fetchall()[0]
+    data = {
+        'id': data[0],
+        'title': data[1],
+    }
+    cur.close()
+    return data
+
+
+def fetch_titles(article_ids: list[int]):
+    data = []
+    for article_id in article_ids:
+        data.append(fetch_title(article_id))
+    return data
+
+
 def clean_database() -> None:
     conn = get_connection()
     cur = conn.cursor()
     cur.execute(_QUERIES['clear_articles'])
     conn.commit()
     cur.close()
+
+
+def teardown_mysql():
+    global _CONNECTION
+    _CONNECTION.close()
+    del _CONNECTION
