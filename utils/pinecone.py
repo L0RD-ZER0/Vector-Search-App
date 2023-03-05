@@ -1,10 +1,7 @@
 from __future__ import annotations
 import pinecone
 from utils.config import Config
-from typing import TYPE_CHECKING
-
-if TYPE_CHECKING:
-    from numpy import ndarray
+import numpy
 
 
 def init_pinecone():
@@ -22,20 +19,45 @@ def get_index():
     return pinecone.Index(Config.PINECONE_INDEX)
 
 
-def upsert_vectors(data: list[dict[str, int | int | ndarray[float]]]):
+def upsert_vectors(data: list[dict[str, int | int | numpy.ndarray[float]]]):
     data = [(str(_['id']), _['vector'].tolist(), {'mysql_id': _['mysql_id']}) for _ in data]
     get_index().upsert(data)  # type: ignore
 
 
-def query_pinecone(content_vector: ndarray[float], *, count: int = 10) -> list[dict[str, int | float]]:
+def upsert_vector(data: dict[str, int | int | numpy.ndarray[float]]):
+    upsert_vectors([data])
+
+
+def query_pinecone(content_vector: numpy.ndarray[float], *, count: int = 10) -> list[dict[str, int | float]]:
     results: pinecone.QueryResponse = get_index().query(vector=content_vector.tolist(), top_k=count, include_metadata=True, include_values=False)  # type: ignore
     results: list = results['matches']
-    return [_format_response(_) for _ in results]
+    return [_format_query_response(_) for _ in results]
 
 
-def _format_response(data: pinecone.ScoredVector) -> dict[str, int]:
+def _format_query_response(data: pinecone.ScoredVector) -> dict[str, int]:
     return {
         'id': int(data['id']),
         'mysql_id': int(data['metadata']['mysql_id']),
         'score': data['score'] * 100,
+    }
+
+
+def query_articles(article_ids: list[int]):
+    response: pinecone.FetchResult = get_index().fetch(ids=[str(article_id) for article_id in article_ids])
+    results = []
+    for result in response['vectors'].values():
+        results.append(_format_fetch_response(result))
+    return results
+
+
+def query_article(article_id: int):
+    d = query_articles([article_id])
+    return d[0] if d else None
+
+
+def _format_fetch_response(data: dict[str, str | dict[str | int] | list[float]]):
+    return {
+        'id': int(data['id']),
+        'mysql_id': int(data['metadata']['mysql_id']),
+        'vector': numpy.array(data['values']),
     }
