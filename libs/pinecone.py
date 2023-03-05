@@ -1,7 +1,9 @@
 from __future__ import annotations
-import pinecone
-from utils.config import Config
+
 import numpy
+import pinecone
+
+from libs.config import Config
 
 
 def init_pinecone():
@@ -30,7 +32,8 @@ def upsert_vector(data: dict[str, int | int | numpy.ndarray[float]]):
 
 
 def query_pinecone(content_vector: numpy.ndarray[float], *, count: int = 10) -> list[dict[str, int | float]]:
-    results: pinecone.QueryResponse = get_index().query(vector=content_vector.tolist(), top_k=count, include_metadata=True, include_values=False)  # type: ignore
+    results: pinecone.QueryResponse = get_index().query(vector=content_vector.tolist(), top_k=count,
+                                                        include_metadata=True, include_values=False)  # type: ignore
     results: list = results['matches']
     return [_format_query_response(_) for _ in results]
 

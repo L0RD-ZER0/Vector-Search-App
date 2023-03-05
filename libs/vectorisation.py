@@ -1,12 +1,14 @@
 from __future__ import annotations
+
 from typing import TYPE_CHECKING
+
 from sentence_transformers import SentenceTransformer
-from utils.config import Config
-from utils.data import normalise_string, RECORD, create_vector_text
+
+from libs.config import Config
+from libs.data import normalise_string, RECORD, create_vector_text
 
 if TYPE_CHECKING:
     from numpy import ndarray
-
 
 _MODEL: SentenceTransformer | None = None
 

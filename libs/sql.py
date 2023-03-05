@@ -1,6 +1,8 @@
 from __future__ import annotations
+
 from mysql import connector
-from utils.config import Config
+
+from libs.config import Config
 
 _CONNECTION: connector.CMySQLConnection | None = None
 _DATABASE = '`plagiarism_analysis`'
@@ -72,7 +74,6 @@ _QUERIES = {
 def init_mysql() -> None:
     """
     Function to initialize MySQL database.
-
     """
     global _CONNECTION
     _CONNECTION = connector.connect(

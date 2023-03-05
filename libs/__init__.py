@@ -1,12 +1,11 @@
 from __future__ import annotations
-from typing import TYPE_CHECKING, TypedDict, Optional
 
-from utils import pinecone, sql, vectorisation
+from typing import TYPE_CHECKING
+
+from libs import pinecone, sql, vectorisation
 
 if TYPE_CHECKING:
     from numpy import ndarray
-    from pandas import Series
-
 
 _INPUT = vectorisation.RECORD
 

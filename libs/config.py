@@ -1,5 +1,8 @@
-from dotenv import load_dotenv
+from __future__ import annotations
+
 from os import environ
+
+from dotenv import load_dotenv
 
 __all__ = 'Config',
 

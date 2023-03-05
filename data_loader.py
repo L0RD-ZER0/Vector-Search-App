@@ -1,9 +1,10 @@
-import utils
-from utils import data
 from math import inf as _all
-import pandas
 from time import sleep, perf_counter_ns
 
+import pandas
+
+import libs
+from libs import data
 
 START = 0
 END = _all
@@ -21,7 +22,7 @@ def main():
 
     t0 = perf_counter_ns()
     print("Initializing...")
-    utils.init()
+    libs.init()
     print("Initialized.")
 
     dataset = data.load_dataset()
@@ -37,7 +38,7 @@ def main():
         _END = min(END, i + BATCH_SIZE)
         t1 = perf_counter_ns()
         print(f"Inserting `{i + 1}` to `{_END}`")
-        utils.upsert_articles(dataset[i: _END])
+        libs.upsert_articles(dataset[i: _END])
         t2 = perf_counter_ns()
         print(f"Inserted `{i + 1}` to `{_END}.")
         print(f"Took {_format_ns(t2 - t1)}.`")
@@ -45,7 +46,7 @@ def main():
         sleep(5)
 
     print("Tearing down...")
-    utils.teardwn()
+    libs.teardwn()
     print("Teardown finished.\n\n")
     tf = perf_counter_ns()
     print(f"Took {_format_ns(tf - t0)} to insert {END - START} records.")

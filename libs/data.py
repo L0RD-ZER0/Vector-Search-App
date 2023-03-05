@@ -1,14 +1,16 @@
 from __future__ import annotations
+
+from typing import TypedDict, Optional
+
 import gensim
 import pandas
-from utils.config import Config
-from typing import TypedDict, Optional
+
+from libs.config import Config
 
 gensim.parsing.preprocessing.STOPWORDS.difference(
     {'above', 'against', 'bill', 'cant', 'during', 'eight', 'empty', 'first', 'five', 'former', 'found', 'four',
      'never', 'nine', 'not', 'one', 'part', 'seven', 'several', 'six', 'then', 'three', 'toward', 'two', 'using'}
 )
-
 
 RECORD = TypedDict('RECORD', {
     'id': int,
