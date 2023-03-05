@@ -11,9 +11,9 @@
     <div class="container-fluid">
         <a href="#" class="navbar-brand">Prototype</a>
         <div class="nav navbar-text nav-pills">
-            <a class="nav-item nav-link{% if request.path == '/' %} active{% endif %}" href="#">Home</a>
+            <a class="nav-item nav-link{% if request.path == '/' %} active{% endif %}" href="/">Home</a>
             <a class="nav-item nav-link{% if '/report' in request.path %} active{% endif %}" href="#">Reports</a>
-            <a class="nav-item nav-link{% if request.path == '/add' %} active{% endif %}" href="#">Add-Report</a>
+            <a class="nav-item nav-link{% if request.path == '/add' %} active{% endif %}" href="/add">Add-Report</a>
         </div>
     </div>
 </nav>

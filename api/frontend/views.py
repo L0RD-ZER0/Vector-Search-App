@@ -5,13 +5,14 @@ def home(request):
     """
     Home-Page at `/`
     """
-    return render(request, 'base.html')
+    return render(request, 'home.html')
 
 
 def add(request):
     """
     Add-Page at `/add`
     """
+    return render(request, 'add.html')
 
 
 def result(request):
