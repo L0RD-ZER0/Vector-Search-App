@@ -1,11 +1,11 @@
-from django.http import HttpResponse
+from django.shortcuts import render
 
 
 def home(request):
     """
     Home-Page at `/`
     """
-    return HttpResponse("It Works!")
+    return render(request, 'base.html')
 
 
 def add(request):
