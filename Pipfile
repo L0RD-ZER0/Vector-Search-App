@@ -12,6 +12,7 @@ sentence-transformers = "*"
 python-dotenv = "*"
 mysql-connector-python = "*"
 gensim = "*"
+django = "*"
 
 [dev-packages]
 
