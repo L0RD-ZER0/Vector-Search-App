@@ -1,0 +1,24 @@
+{% extends 'report-data.html' %}
+
+{% block similarity %}
+<hr class="border border-dark border-3 opacity-75 my-3">
+<h2>Similarity Results:</h2>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Similarity</th>
+    </tr>
+  </thead>
+  <tbody class="table-group-divider">
+    {% for result in results %}
+      <tr>
+        <th scope="row">{{ result.id }}</th>
+        <td>{{ result.title }}</td>
+        <td>{{ result.score }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

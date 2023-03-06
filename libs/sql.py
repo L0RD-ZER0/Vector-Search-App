@@ -15,7 +15,7 @@ _TABLES = {
         `affiliations` mediumtext,
         `abstract` mediumtext,
         `text` mediumtext NOT NULL,
-        `bibliography` mediumtext NOT NULL
+        `bibliography` mediumtext
     );
     """
 }
@@ -215,5 +215,7 @@ def clean_database() -> None:
 
 def teardown_mysql():
     global _CONNECTION
-    _CONNECTION.close()
+    if _CONNECTION is not None:
+        _CONNECTION.close()
     del _CONNECTION
+    _CONNECTION = None

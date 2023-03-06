@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+<h2>Report:</h2>
+<form class="mt-5 px-4">
+  {% csrf_token %}
+  <div class="mt-3 mb-2">
+    <label class="form-label" for="title">Title:</label>
+    <pre id="title" class="form-control">{{ title }}</pre>
+  </div>
+  <div class="mt-3 mb-2">
+    <label class="form-label" for="authors">Authors:</label>
+    <pre id="authors">{{ authors }}</pre>
+  </div>
+  <div class="mt-3 mb-2">
+    <label class="form-label" for="affiliations">Affiliations:</label>
+    <pre id="affiliations" class="form-control">{{ affiliations }}</pre>
+  </div>
+  <div class="mt-3 mb-2">
+    <label class="form-label" for="abstract">Abstract:</label>
+    <pre id="abstract" class="form-control">{{ abstract }}</pre>
+  </div>
+  <div class="mt-3 mb-2">
+    <label class="form-label" for="text">Content:</label>
+    <pre id="text" class="form-control">{{ text }}</pre>
+  </div>
+  <div class="mt-3 mb-2">
+    <label class="form-label" for="bibliography">Bibliography:</label>
+    <pre id="bibliography" class="form-control">{{ bibliography }}</pre>
+  </div>
+</form>
+{% block similarity %}
+{% endblock %}
+{% endblock %}

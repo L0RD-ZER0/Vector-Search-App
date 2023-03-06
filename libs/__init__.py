@@ -16,7 +16,7 @@ def init():
     vectorisation.init_vectoriser()
 
 
-def validate_input(inp: _INPUT):
+def validate_input(inp: _INPUT, can_generate_id: bool = False):
     if 'id' not in inp:
         inp['id'] = pinecone.get_count() + 1
     for k in 'title', 'text', 'bibliography':
@@ -26,7 +26,7 @@ def validate_input(inp: _INPUT):
 
 
 def upsert_article(data: _INPUT):
-    validate_input(data)
+    validate_input(data, can_generate_id=True)
     vector = vectorisation.create_vector_text(data)
     vector = vectorisation.vectorise(vector)
     vector = {'id': data['id'], 'mysql_id': data['id'], 'vector': vector}

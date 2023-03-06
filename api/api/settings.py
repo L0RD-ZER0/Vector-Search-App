@@ -36,8 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
     'frontend',
+    'django.contrib.staticfiles',
 ]
 
 MIDDLEWARE = [
@@ -122,3 +122,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Update max upload size to 8 mb
+DATA_UPLOAD_MAX_MEMORY_SIZE = 8 * 1024 * 1024
