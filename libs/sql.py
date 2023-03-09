@@ -5,7 +5,7 @@ from mysql import connector
 from libs.config import Config
 
 _CONNECTION: connector.CMySQLConnection | None = None
-_DATABASE = '`plagiarism_analysis`'
+_DATABASE = f'`{Config.MYSQL_DATABASE}`'
 _TABLES = {
     'reports': """
     CREATE TABLE IF NOT EXISTS `reports`(

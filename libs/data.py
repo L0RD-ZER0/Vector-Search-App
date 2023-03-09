@@ -55,5 +55,5 @@ def normalise_string(string: str) -> str:
 
     """
     string = string.lower()
-    string = gensim.parsing.preprocessing.remove_stopwords(string)
+    # string = gensim.parsing.preprocessing.remove_stopwords(string)  # remove stopwords
     return string

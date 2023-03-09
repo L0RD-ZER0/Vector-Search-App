@@ -15,6 +15,7 @@ class Config:
     MYSQL_PORT = environ['MYSQL_PORT']
     MYSQL_USER = environ['MYSQL_USER']
     MYSQL_PASSWD = environ['MYSQL_PASSWD']
+    MYSQL_DATABASE = environ['MYSQL_DATABASE']
     PINECONE_API_KEY = environ['PINECONE_API']
     PINECONE_INDEX = environ['PINECONE_INDEX']
     PINECONE_ENVIRONMENT = environ['PINECONE_ENVIRONMENT']
